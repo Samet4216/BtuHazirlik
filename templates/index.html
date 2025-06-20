@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hazırlık Not Hesaplama Uygulaması</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="konyalı">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <h1 style="border: 5px solid black;text-align: center;color: red;">
+            NOT HESAPLAMA UYGULAMASI
+        </h1>
+        <p style="font-size: 20px;font-weight: 200;">
+            Bu web sitesini kullanaraktan bulunduğunuz kuru geçmek için almanız gereken en düşük notları hesaplayabilirsiniz.<br>
+            Siteme ekleyeceğim seçenekler ile birden fazla açıklanmayan notlar ile tahmini hesaplamalar yapılabilir hale gelecektir.<br>
+            <br>
+            <strong style="marker: none;">Hedef Ortalama: {{ hedef_ortalama if hedef_ortalama else 70 }}</strong> <!-- Python'dan gelmezse varsayılan gösterir -->
+        <br><br>
+        </p>
+        <form method="POST" action="/hesapla">
+            <table border="2">
+                <thead><tr class="first"><th>SINAV</th><th>KATSAYI</th><th>NOTUNUZU GİRİN</th></tr></thead>
+                <tbody>
+                    <tr><td>WR1</td><td class="kare">5</td><td><input type="text" name="wr1_not" value="{{ girilen_notlar.wr1_not if girilen_notlar else '' }}"></td></tr>
+                    <tr><td>RE1</td><td class="kare">9</td><td><input type="text" name="re1_not" value="{{ girilen_notlar.re1_not if girilen_notlar else '' }}"></td></tr>
+                    <tr><td>LS1</td><td class="kare">9</td><td><input type="text" name="ls1_not" value="{{ girilen_notlar.ls1_not if girilen_notlar else '' }}"></td></tr>
+                    <tr><td>LU1</td><td class="kare">8</td><td><input type="text" name="lu1_not" value="{{ girilen_notlar.lu1_not if girilen_notlar else '' }}"></td></tr>
+                    <tr><td>WR2</td><td class="kare">5</td><td><input type="text" name="wr2_not" value="{{ girilen_notlar.wr2_not if girilen_notlar else '' }}"></td></tr>
+                    <tr><td>SP1</td><td class="kare">7</td><td><input type="text" name="sp1_not" value="{{ girilen_notlar.sp1_not if girilen_notlar else '' }}"></td></tr>
+                    <tr><td>ON_learn</td><td class="kare">4</td><td><input type="text" name="on_not" value="{{ girilen_notlar.on_not if girilen_notlar else '' }}"></td></tr>
+                    <tr><td>ST_app</td><td class="kare">6</td><td><input type="text" name="st_not" value="{{ girilen_notlar.st_not if girilen_notlar else '' }}"></td></tr>
+                    <tr><td>RE2</td><td class="kare">9</td><td><input type="text" name="re2_not" value="{{ girilen_notlar.re2_not if girilen_notlar else '' }}"></td></tr>
+                    <tr><td>LS2</td><td class="kare">9</td><td><input type="text" name="ls2_not" value="{{ girilen_notlar.ls2_not if girilen_notlar else '' }}"></td></tr>
+                    <tr><td>LU2</td><td class="kare">8</td><td><input type="text" name="lu2_not" value="{{ girilen_notlar.lu2_not if girilen_notlar else '' }}"></td></tr>
+                    <tr><td>WR3</td><td class="kare">9</td><td><input type="text" name="wr3_not" value="{{ girilen_notlar.wr3_not if girilen_notlar else '' }}"></td></tr>
+                    <tr><td>SP2</td><td class="kare">12</td><td><input type="text" name="sp2_not" value="{{ girilen_notlar.sp2_not if girilen_notlar else '' }}"></td></tr>
+                </tbody>
+            </table>
+            <br>
+            <br>
+            <button type="submit" class="benimButon">Hesapla</button>
+        </form>
+
+        <br>
+
+        {% if hatalar %}
+            <div style="color: red; border: 1px solid red; padding: 10px; margin-top: 20px;">
+                <h2>Hatalar:</h2>
+                <ul>
+                    {% for hata in hatalar %}
+                        <li>{{ hata }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% if sonuc_mesaji %}
+            <div style="color: darkblue; border: 1px solid darkblue; padding: 10px; margin-top: 20px;">
+                <h2>Durumunuz (Tüm Notlar Girildiğinde):</h2>
+                <p>{{ sonuc_mesaji }}</p>
+            </div>
+        {% endif %}
+
+        {% if kalan_ders_bilgisi %}
+            <div style="color: green; border: 1px solid green; padding: 10px; margin-top: 20px;">
+                <h2>Kalan Dersler İçin Hesaplama:</h2>
+                <p>{{ kalan_ders_bilgisi }}</p>
+            </div>
+        {% endif %}
+
+      <footer>
+    <p>&copy; 2025 Samet. Tüm hakları saklıdır.</p>
+</footer>    
+
+    </body>
+</html>
