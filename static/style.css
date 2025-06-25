@@ -1,0 +1,45 @@
+
+table {
+    background-color: rgb(240, 248, 255);
+    height: fit-content;
+
+
+
+    }
+    .first{
+    
+        background-color: rgb(158, 255, 203);
+        font-size: medium;
+        font-weight: 50;
+
+
+    }
+
+    td {
+         width: 50%;
+         height: 70%;
+         background-color: rgb(168, 222, 255);
+         text-align: center;
+         vertical-align: middle;
+
+    }
+
+    .kare {
+      width: 60%; /* ortadaki sütunu büyüttük */
+
+    }
+.benimButon {
+  background-color: #4CAF50; /* yeşil */
+  color: white;              /* yazı rengi */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  
+  
+}
+
+.benimButon:hover {
+  background-color: #5bb95f; /* üstüne gelince renk değişsin */
+}
