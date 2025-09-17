@@ -89,7 +89,7 @@ def hesapla():
                      mevcut_ortalama_sadece_girilenler = mevcut_toplam_puan_carpi_katsayi / mevcut_toplam_katsayi
                      kalan_ders_bilgisi += f" (Sadece girilen derslerinizin ortalaması: {mevcut_ortalama_sadece_girilenler:.2f})"
             else: # 0 <= gereken_not <= 100 durumu
-                kalan_ders_bilgisi += f"{HEDEF_ORTALAMA:.2f} ortalamasına ulaşmak için her birinden ortalama en az {kalan_derslerden_gereken_ortalama_not:.2f} almanız gerekmektedir."
+                kalan_ders_bilgisi += f"{HEDEF_ORTALAMA:.2f} ortalamasına ulaşmak için her birinden en az {kalan_derslerden_gereken_ortalama_not:.2f} puan almanız gerekmektedir."
         else:
             # Bu durumun oluşmaması gerekir eğer kalan_ders_sayisi > 0 ise,
             # ama bir güvenlik önlemi olarak eklenebilir.
