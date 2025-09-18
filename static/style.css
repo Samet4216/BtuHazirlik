@@ -28,18 +28,35 @@ table {
       width: 60%; /* ortadaki sütunu büyüttük */
 
     }
+.buttonContainer{
+  display: flex;
+  gap: 10%;
+}
+
 .benimButon {
-  background-color: #4CAF50; /* yeşil */
-  color: white;              /* yazı rengi */
+  background-color: #4CAF50; 
+  color: white;             
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
-  
-  
 }
 
 .benimButon:hover {
   background-color: #5bb95f; /* üstüne gelince renk değişsin */
+}
+
+.restart {
+  background-color: #2139b1; 
+  color: white;             
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.restart:hover {
+  background-color: #1479cb; 
 }
