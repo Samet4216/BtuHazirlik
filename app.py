@@ -11,8 +11,12 @@ HEDEF_ORTALAMA = 70.0  # Geçmek için gereken hedef ortalama
 
 @app.route('/')
 def index():
-    # Ana sayfayı yüklerken hedef ortalamayı da gönderiyoruz
     return render_template('index.html', hedef_ortalama=HEDEF_ORTALAMA, girilen_notlar={})
+
+@app.route('/reset', methods=['POST'])
+def reset():
+    # Temizle butonuna basıldığında formu sıfırlar.
+    return render_template('index.html', hedef_ortalama=HEDEF_ORTALAMA, girilen_notlar={}, hatalar=[], sonuc_mesaji="", kalan_ders_bilgisi="")
 
 @app.route('/hesapla', methods=['POST'])
 def hesapla():
@@ -56,7 +60,7 @@ def hesapla():
                                sonuc_mesaji="",
                                kalan_ders_bilgisi="")
 
-    # --- Hesaplama Mantığı ---
+    # --- Hesaplama İşlemi ---
     sonuc_mesaji = ""
     kalan_ders_bilgisi = ""
 
@@ -83,23 +87,18 @@ def hesapla():
 
             if kalan_derslerden_gereken_ortalama_not > 100:
                 kalan_ders_bilgisi += f"maalesef {HEDEF_ORTALAMA:.2f} ortalamasına ulaşmanız artık mümkün değil (kalan derslerden ortalama {kalan_derslerden_gereken_ortalama_not:.2f} almanız gerekiyor)."
-            elif kalan_derslerden_gereken_ortalama_not < 0: # <= 0 yerine < 0 daha mantıklı olabilir, 0 da bir hedef olabilir.
+            elif kalan_derslerden_gereken_ortalama_not < 0:
                 kalan_ders_bilgisi += f"{HEDEF_ORTALAMA:.2f} ortalamasına ulaşmak için ek puana ihtiyacınız yok, hatta 0 alsanız bile geçiyorsunuz. Mevcut durumunuz iyi!"
                 if mevcut_toplam_katsayi > 0:
                      mevcut_ortalama_sadece_girilenler = mevcut_toplam_puan_carpi_katsayi / mevcut_toplam_katsayi
                      kalan_ders_bilgisi += f" (Sadece girilen derslerinizin ortalaması: {mevcut_ortalama_sadece_girilenler:.2f})"
             else: # 0 <= gereken_not <= 100 durumu
-                kalan_ders_bilgisi += f"{HEDEF_ORTALAMA:.2f} ortalamasına ulaşmak için her birinden en az {kalan_derslerden_gereken_ortalama_not:.2f} puan almanız gerekmektedir."
+                kalan_ders_bilgisi += f"{HEDEF_ORTALAMA:.2f} ortalamasına ulaşmak için her birinden ortalama en az {kalan_derslerden_gereken_ortalama_not:.2f} almanız gerekmektedir."
         else:
-            # Bu durumun oluşmaması gerekir eğer kalan_ders_sayisi > 0 ise,
-            # ama bir güvenlik önlemi olarak eklenebilir.
             kalan_ders_bilgisi = "Hesaplama için kalan ders katsayısı bulunamadı."
 
     # Eğer hiç not girilmemişse (tüm inputlar boşsa) özel bir hata mesajı verelim.
-    # Bu kontrolü en sona aldım ki, eğer hatalı girişler varsa onlar öncelikli olsun.
-    # `mevcut_toplam_katsayi == 0` kontrolü, tüm girilen notların geçersiz olduğu durumu da kapsar.
     # `kalan_ders_sayisi == len(SINAVLAR_VE_KATSAYILARI)` tüm derslerin boş bırakıldığını gösterir.
-    # `not any(g.strip() for g in girilen_notlar_form_icin.values() if g)` daha sağlam bir boşluk kontrolü.
     
     all_inputs_empty_or_whitespace = True
     for value in girilen_notlar_form_icin.values():
@@ -121,7 +120,7 @@ def hesapla():
                            kalan_ders_bilgisi=kalan_ders_bilgisi,
                            girilen_notlar=girilen_notlar_form_icin,
                            hedef_ortalama=HEDEF_ORTALAMA,
-                           hatalar=hatalar) # Hataları her zaman gönderelim, boş olsa bile sorun olmaz
+                           hatalar=hatalar) 
 
 if __name__ == '__main__':
     app.run(debug=True)
