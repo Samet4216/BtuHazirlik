@@ -43,7 +43,12 @@ sayı yerine farklı karakter kullanıldığı zaman ".... geçerli bir sayı de
 
 <img width="1896" height="867" alt="image" src="https://github.com/user-attachments/assets/00232eb0-116e-44f9-96bb-532affc1de1a" />
 
+----18.09.25----
+Temizle butonuna basaraktan girilen bütün verileri silebilirsiniz.
 
+<img width="1897" height="865" alt="image" src="https://github.com/user-attachments/assets/912c0a7d-9df1-41a1-b4af-ce52fed0289b" />
+
+<img width="1895" height="868" alt="Ekran görüntüsü 2025-09-18 111838" src="https://github.com/user-attachments/assets/e52f0379-e451-4eef-9db2-c42c4062201f" />
 
 
 
